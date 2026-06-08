@@ -136,21 +136,6 @@ Current screenshots in `docs/screenshots/`:
 
 ![Inventory](docs/screenshots/07-inventory.png)
 
-## Demo Flow
-
-Recommended demo flow for a 60-90 second video:
-
-- Open the login page.
-- Log in with the seeded admin user.
-- Show the dashboard.
-- Create or open a customer.
-- Create or open a device.
-- Create a repair order.
-- Change the repair order status.
-- Open the order detail page.
-- Show notes, payments, parts usage or status history.
-- Close by showing the stack: .NET 8, PostgreSQL, Docker and React.
-
 ## Getting Started
 
 ### Requirements
