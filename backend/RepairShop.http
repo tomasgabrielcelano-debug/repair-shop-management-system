@@ -1,0 +1,97 @@
+@baseUrl = http://localhost:5080
+@token = {{login.response.body.data.accessToken}}
+
+### Login (admin)
+# @name login
+POST {{baseUrl}}/api/v1/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin@local",
+  "password": "Admin12345"
+}
+
+### Login (tech)
+# @name loginTech
+POST {{baseUrl}}/api/v1/auth/login
+Content-Type: application/json
+
+{
+  "email": "tech@local",
+  "password": "Tech123456"
+}
+
+### List customers
+GET {{baseUrl}}/api/v1/customers
+Authorization: Bearer {{token}}
+
+### Create customer
+# @name createCustomer
+POST {{baseUrl}}/api/v1/customers
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "fullName": "Juan Perez",
+  "phone": "+54 11 5555-1234",
+  "notes": "Cliente frecuente"
+}
+
+### Create device
+# @name createDevice
+POST {{baseUrl}}/api/v1/devices
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "customerId": "{{createCustomer.response.body.data.id}}",
+  "brand": "Apple",
+  "model": "iPhone 13",
+  "serialNumber": "SN123",
+  "notes": "128GB"
+}
+
+### Create repair order
+# @name createOrder
+POST {{baseUrl}}/api/v1/orders
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "customerId": "{{createCustomer.response.body.data.id}}",
+  "deviceId": "{{createDevice.response.body.data.id}}",
+  "issueDescription": "No carga. Revisar pin de carga.",
+  "notes": "Diagnóstico express"
+}
+
+### Change order status -> Diagnosing
+POST {{baseUrl}}/api/v1/orders/{{createOrder.response.body.data.id}}/status
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "status": "Diagnosing"
+}
+
+### Read status history
+GET {{baseUrl}}/api/v1/orders/{{createOrder.response.body.data.id}}/history
+Authorization: Bearer {{token}}
+
+### Add note
+POST {{baseUrl}}/api/v1/orders/{{createOrder.response.body.data.id}}/notes
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "body": "Cliente avisa que también se reinicia."
+}
+
+### Add attachment (link)
+POST {{baseUrl}}/api/v1/orders/{{createOrder.response.body.data.id}}/attachments
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "url": "https://example.com/foto1.jpg",
+  "label": "Foto del equipo"
+}

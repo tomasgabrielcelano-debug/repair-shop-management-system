@@ -1,0 +1,16 @@
+# Development overrides
+# Usage:
+#   docker compose -f docker-compose.yml -f docker-compose.dev.yml up --build
+services:
+  api:
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ConnectionStrings__RepairShopDb: Host=postgres;Port=5432;Database=repairshop;Username=postgres;Password=postgres
+      Jwt__Issuer: RepairShop
+      Jwt__Audience: RepairShop
+      Jwt__Key: DEV_CHANGE_ME_RepairShop_SuperSecretKey_1234567890
+      Swagger__Enabled: "true"
+      Seed__Enabled: "true"
+      Cors__AllowedOrigins__0: http://localhost:5173
+      Cors__AllowedOrigins__1: http://localhost:8080
+      AllowedHosts: localhost;127.0.0.1

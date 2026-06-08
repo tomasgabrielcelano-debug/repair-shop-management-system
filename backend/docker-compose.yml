@@ -1,0 +1,47 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: repairshop-postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: repairshop
+    ports:
+      - "5432:5432"
+    volumes:
+      - repairshop_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d repairshop"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 5s
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: repairshop-api
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost:8080/healthz || exit 1"]
+      interval: 10s
+      timeout: 3s
+      retries: 10
+      start_period: 15s
+    environment:
+      ASPNETCORE_URLS: http://+:8080
+      # Environment name, JWT, ConnectionString, Swagger/Seed flags and CORS are set in:
+      # - docker-compose.dev.yml
+      # - docker-compose.prod.yml
+      HttpsRedirection__Enabled: "false"
+      Database__Init: Migrate
+      Database__ConnectRetries: "30"
+      Database__ConnectDelayMs: "2000"
+    ports:
+      - "8080:8080"
+
+volumes:
+  repairshop_pgdata:

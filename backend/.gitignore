@@ -1,0 +1,14 @@
+bin/
+obj/
+.vs/
+.vscode/
+*.user
+*.suo
+*.db
+*.sqlite
+*.log
+.env
+
+# Local-only appsettings (never commit secrets)
+**/appsettings.Local.json
+**/appsettings.*.Local.json

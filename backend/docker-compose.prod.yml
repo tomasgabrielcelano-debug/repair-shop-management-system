@@ -1,0 +1,28 @@
+# Production overrides
+# Usage:
+#   docker compose -f docker-compose.yml -f docker-compose.prod.yml up --build -d
+#
+# IMPORTANT:
+# - Swagger and Seed are forced OFF in production.
+# - Provide secrets via env/.env (gitignored) or your secret manager.
+services:
+  api:
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      # Secrets (do NOT commit real values)
+      ConnectionStrings__RepairShopDb: ${CONNECTIONSTRINGS__REPAIRSHOPDB}
+      Jwt__Key: ${JWT__KEY}
+      # Optional (defaults to RepairShop if not set)
+      Jwt__Issuer: ${JWT__ISSUER:-RepairShop}
+      Jwt__Audience: ${JWT__AUDIENCE:-RepairShop}
+
+      # Hard OFF in prod (the app will refuse to start if you try true)
+      Swagger__Enabled: "false"
+      Seed__Enabled: "false"
+
+      # CORS must be explicit in prod
+      Cors__AllowedOrigins__0: ${CORS_ALLOWED_ORIGIN_0}
+      # Cors__AllowedOrigins__1: ${CORS_ALLOWED_ORIGIN_1}
+
+      # Must NOT be "*" in prod
+      AllowedHosts: ${ALLOWED_HOSTS}
