@@ -112,35 +112,29 @@ User -> React Frontend -> .NET API -> Application Layer -> Domain Layer -> Postg
 
 ## Screenshots
 
-Screenshots should be placed in:
+Current screenshots in `docs/screenshots/`:
 
-```txt
-docs/screenshots/
-```
+- Swagger API
+- Login
+- Dashboard
+- Customers
+- Devices
+- Orders
+- Inventory
 
-Recommended screenshots:
-
-```txt
-01-swagger-api.png
-02-login.png
-03-dashboard.png
-04-customers.png
-05-devices.png
-06-orders.png
-07-order-detail.png
-08-inventory.png
-```
-
-Suggested README image references after adding the screenshots:
-
-```txt
 ![Swagger API](docs/screenshots/01-swagger-api.png)
+
 ![Login](docs/screenshots/02-login.png)
+
 ![Dashboard](docs/screenshots/03-dashboard.png)
+
+![Customers](docs/screenshots/04-customers.png)
+
+![Devices](docs/screenshots/05-devices.png)
+
 ![Orders](docs/screenshots/06-orders.png)
-![Order Detail](docs/screenshots/07-order-detail.png)
-![Inventory](docs/screenshots/08-inventory.png)
-```
+
+![Inventory](docs/screenshots/07-inventory.png)
 
 ## Demo Flow
 
