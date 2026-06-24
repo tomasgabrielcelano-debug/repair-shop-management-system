@@ -16,6 +16,10 @@ const schema = z.object({
 
 type FormValues = z.infer<typeof schema>
 
+// Credenciales de demo (deben existir en la base; ver DbSeeder / comando --seed)
+const DEMO_EMAIL = 'admin@local'
+const DEMO_PASSWORD = 'Admin12345'
+
 export default function LoginPage() {
   const nav = useNavigate()
   const { login, isAuthenticated } = useAuth()
@@ -24,6 +28,11 @@ export default function LoginPage() {
     resolver: zodResolver(schema),
     defaultValues: { email: '', password: '' }
   })
+
+  const fillDemo = () => {
+    form.setValue('email', DEMO_EMAIL, { shouldValidate: true })
+    form.setValue('password', DEMO_PASSWORD, { shouldValidate: true })
+  }
 
   useEffect(() => {
     if (isAuthenticated) nav('/app', { replace: true })
@@ -50,6 +59,24 @@ export default function LoginPage() {
             <p className="mt-1 text-sm text-slate-500">Iniciá sesión para acceder al panel.</p>
           </CardHeader>
           <CardContent>
+            <div className="mb-4 rounded-md border border-sky-200 bg-sky-50 p-3 text-sm">
+              <div className="flex items-center justify-between gap-2">
+                <span className="font-medium text-sky-900">🔎 Acceso de demo</span>
+                <button
+                  type="button"
+                  onClick={fillDemo}
+                  className="rounded border border-sky-300 bg-white px-2 py-1 text-xs font-medium text-sky-700 hover:bg-sky-100"
+                >
+                  Usar credenciales de demo
+                </button>
+              </div>
+              <p className="mt-2 text-xs text-slate-600">
+                Email: <code className="font-mono text-slate-800">{DEMO_EMAIL}</code>
+                {' · '}
+                Contraseña: <code className="font-mono text-slate-800">{DEMO_PASSWORD}</code>
+              </p>
+            </div>
+
             <form onSubmit={onSubmit} className="space-y-3">
               <div>
                 <label className="text-sm font-medium">Email</label>
