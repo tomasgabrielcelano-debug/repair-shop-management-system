@@ -18,7 +18,7 @@ type FormValues = z.infer<typeof schema>
 
 // Credenciales de demo (deben existir en la base; ver DbSeeder / comando --seed)
 const DEMO_EMAIL = 'admin@local'
-const DEMO_PASSWORD = 'Admin12345'
+const DEMO_PASSWORD = 'Admin123456'
 
 export default function LoginPage() {
   const nav = useNavigate()
