@@ -111,8 +111,3 @@ docker compose --env-file .env.prod.local -f docker-compose.yml -f docker-compos
 - **CORS** → explícito por entorno (dev localhost; prod solo dominios reales).
 - **Misconfig** (seed/swagger en prod) → hard-off y bloqueo de arranque.
 - **Logs con PII** → logs estructurados; evitar loguear body sensible.
-
-## Roadmap (vNext)
-
-- Quote como entidad con estados: `Draft → Sent → Approved/Rejected`.
-- OpenTelemetry (traces/metrics) exportable (OTLP) para prod.
