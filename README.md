@@ -266,12 +266,3 @@ This project can be adapted for businesses that need to organize service orders,
 Portfolio-ready base version.
 
 The current version includes a working backend, frontend, PostgreSQL setup, Docker Compose configuration, authentication, business entities and automated backend tests.
-
-Next improvements:
-
-- Add screenshots to docs/screenshots.
-- Record a 60-90 second demo video.
-- Add deployment instructions.
-- Review dependency warnings.
-- Improve nullable warnings.
-- Add more end-to-end tests.
